@@ -10,4 +10,4 @@ This means you can run terraform from any machine only having python and venv pa
 ## How do I use this template.
 
 Fill out your aws.env file using the aws.env.template with your aws credentials then fill it out.
-Write your terraform code in the workflow then run build/aws.sh 
+Write your terraform code in the workflow then run build/aws.sh preferably in bash.
