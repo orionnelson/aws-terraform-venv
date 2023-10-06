@@ -143,16 +143,20 @@ echo "AWS CLI installation complete"
 
 # Function to run Terraform commands
 run_terraform() {
+  cd dev
   terraform init
   terraform plan -out=tfplan
 
   # Ask for user input to apply the changes or destroy resources
-  read -p "Do you want to apply the changes (a), destroy resources (d), or do nothing (n)? (a/d/n): " user_action
+  read -p "Do you want to apply the changes (a), destroy resources (d), enter a custom command (c), or do nothing (n)? (a/d/c/n): " user_action
 
   if [ "$user_action" == "a" ] || [ "$user_action" == "A" ]; then
     terraform apply -auto-approve tfplan
   elif [ "$user_action" == "d" ] || [ "$user_action" == "D" ]; then
     terraform destroy -auto-approve
+  elif [ "$user_action" == "c" ] || [ "$user_action" == "C" ]; then
+    read -p "Enter the terraform command you want to run (e.g., 'terraform refresh'): " custom_command
+    eval $custom_command
   else
     echo "No action taken."
   fi
